@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+<div class="col-md-6">
+
+<div class="card shadow text-center">
+
+<div class="card-body">
+
+<h3 class="mb-3">Test Result</h3>
+
+<p class="text-muted">Topic: <strong>{{ topic.name }}</strong></p>
+
+<h2 class="mb-3">
+{{ score }} / {{ total }}
+</h2>
+
+{% if score >= total|floatformat:0 %}
+<span class="badge bg-success p-2">Excellent</span>
+
+{% elif score >= total|add:"-2" %}
+<span class="badge bg-warning p-2">Good Performance</span>
+
+{% else %}
+<span class="badge bg-danger p-2">Needs Improvement</span>
+{% endif %}
+
+<br><br>
+
+<a href="/test/dashboard/" class="btn btn-primary me-2">
+Dashboard
+</a>
+
+<a href="/test/topics/" class="btn btn-success">
+Take Another Test
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

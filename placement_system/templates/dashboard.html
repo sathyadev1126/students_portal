@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Student Dashboard</h2>
+
+<div class="row">
+
+<div class="col-md-4">
+<div class="card shadow text-center mb-3">
+<div class="card-body">
+<h5>Placement Readiness</h5>
+<h2 class="text-primary">{{ readiness_score }}/100</h2>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card shadow text-center mb-3">
+<div class="card-body">
+<h5>Average Score</h5>
+<h2 class="text-success">{{ average_score }}</h2>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card shadow text-center mb-3">
+<div class="card-body">
+<h5>Total Tests</h5>
+<h2>{{ results|length }}</h2>
+</div>
+</div>
+</div>
+
+</div>
+
+<br>
+
+<h4>Company Mock Tests</h4>
+
+<a href="{% url 'company_test_list' %}" class="btn btn-primary mb-3">
+Take Company Mock Test
+</a>
+
+<br>
+
+<h4>Weak Topics</h4>
+
+{% if weak_topics %}
+
+<ul class="list-group mb-3">
+
+{% for topic in weak_topics %}
+
+<li class="list-group-item">{{ topic }}</li>
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+<div class="alert alert-success">
+No weak topics detected 🎉
+</div>
+
+{% endif %}
+
+<h4>Company-wise Readiness</h4>
+
+<table class="table table-striped">
+
+<tr>
+<th>Company</th>
+<th>Readiness %</th>
+</tr>
+
+{% for item in company_analysis %}
+
+<tr>
+<td>{{ item.company }}</td>
+<td>{{ item.readiness }}%</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<h4>Test History</h4>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Topic</th>
+<th>Score</th>
+<th>Total</th>
+<th>Date</th>
+</tr>
+
+{% for result in results %}
+
+<tr>
+<td>{{ result.topic.name }}</td>
+<td>{{ result.score }}</td>
+<td>{{ result.total_questions }}</td>
+<td>{{ result.created_at }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<a href="{% url 'topic_list' %}" class="btn btn-success">
+Take Another Test
+</a>
+
+{% endblock %}

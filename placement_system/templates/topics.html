@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Select Practice Topic</h2>
+
+<div class="row">
+
+{% for topic in topics %}
+
+<div class="col-md-4">
+
+<div class="card shadow mb-4">
+
+<div class="card-body text-center">
+
+<h5 class="card-title">{{ topic.name }}</h5>
+
+<a href="/test/start/{{ topic.id }}/" class="btn btn-primary">
+Start Test
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
